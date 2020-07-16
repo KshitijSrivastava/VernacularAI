@@ -56,9 +56,9 @@ class ValidateNumericConstraint:
         :return: a tuple of (filled, partially_filled, trigger, params)
         """
         if pick_first:
-            age_stated = ''
+            value_stated = ''
         else:
-            age_stated = []
+            value_stated = []
 
         partially_filled = False
 
@@ -67,10 +67,10 @@ class ValidateNumericConstraint:
                 globals()[var_name] = d['value']
                 if eval(constraint):
                     if pick_first: 
-                        if age_stated == '':
-                            age_stated = d['value']
+                        if value_stated == '':
+                            value_stated = d['value']
                     else:
-                        age_stated.append(d['value'])
+                        value_stated.append(d['value'])
                 else:
                     partially_filled  = True
 
@@ -79,9 +79,9 @@ class ValidateNumericConstraint:
         else:
             filled = True
 
-        if not filled and (age_stated != '' or age_stated == []):
-            return (filled, partially_filled, invalid_trigger, { key: age_stated } )
+        if not filled and (value_stated != '' or value_stated == []):
+            return (filled, partially_filled, invalid_trigger, { key: value_stated } )
         elif not filled:
             return (filled, partially_filled, invalid_trigger, {} )
         else:
-            return (filled, partially_filled, "", { key: age_stated } )
+            return (filled, partially_filled, "", { key: value_stated } )

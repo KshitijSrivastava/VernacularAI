@@ -47,36 +47,36 @@ class ValidateSlotValues:
       :return: a tuple of (filled, partially_filled, trigger, params)
       """
 
-      invalid_ids_present = False
+      invalid_values_present = False
 
       if support_multiple:
-        ids_stated = []
+        values_stated = []
 
       for d in values:
         if d['value'] in supported_values:
           if pick_first:
-            ids_stated = d['value'].upper()
+            values_stated = d['value'].upper()
             break
           if support_multiple:
-            ids_stated.append(d['value'].upper())
+            values_stated.append(d['value'].upper())
         else:
-          invalid_ids_present = True
+          invalid_values_present = True
 
       if len(values) == 0:
-        invalid_ids_present = True
+        invalid_values_present = True
 
       if support_multiple:
-        if len(ids_stated) == len(values):
+        if len(values_stated) == len(values):
           partially_filled = False
         else:
           partially_filled = True
       else:
-        if len(ids_stated) > 0:
+        if len(values_stated) > 0:
           partially_filled = False
         else:
           partially_filled = True
 
-      if invalid_ids_present:
-        return (not invalid_ids_present, partially_filled, invalid_trigger, {} )
+      if invalid_values_present:
+        return (not invalid_values_present, partially_filled, invalid_trigger, {} )
       else:
-        return (not invalid_ids_present, partially_filled, "", { key: ids_stated } )
+        return (not invalid_values_present, partially_filled, "", { key: values_stated } )
