@@ -26,7 +26,7 @@ class ValidateSlotView(APIView):
             return_response = obj.get_validation_results()
             return Response(return_response , status=status.HTTP_200_OK)
         
-        return Response({}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_200_OK)
 
 
 class ValidateNumericConstraintView(APIView):
@@ -39,6 +39,6 @@ class ValidateNumericConstraintView(APIView):
             return_response = obj.get_validation_results()
             return Response(return_response , status=status.HTTP_200_OK)
         
-        return Response({serializer.errors}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_200_OK)
 
 
